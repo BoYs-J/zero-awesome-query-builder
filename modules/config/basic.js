@@ -6,7 +6,7 @@ import {escapeRegExp, getTitleInListValues} from "../utils/stuff";
 import moment from "moment";
 import {settings as defaultSettings} from "../config/default";
 
-moment.locale('zh-cn'); //中文的时间
+// moment.locale('zh-cn'); //中文的时间
 const {
   //vanilla
   VanillaBooleanWidget,
@@ -31,7 +31,7 @@ const { ProximityOperator } = Operators;
 
 const conjunctions = {
   AND: {
-    label: "和",
+    label: "含",
     mongoConj: "$and",
     reversedConj: "OR",
     formatConj: (children, conj, not, isForDisplay) => {

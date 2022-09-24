@@ -1,9 +1,9 @@
 import moment from "moment";
-
-moment.locale('zh-cn'); //中文的时间
+// import 'moment/locale/zh-cn';
+// moment.locale('zh-cn'); //中文的时间
 
 const NOW = {
-  label: "Now",
+  label: "现在",
   returnType: "datetime",
   jsonLogic: "now",
   //todo: document option `jsonLogicCustomOps`

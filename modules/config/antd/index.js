@@ -1,9 +1,12 @@
-import en_US from "antd/lib/locale-provider/en_US";
+// import en_US from "antd/lib/locale-provider/en_US";
+import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import AntdWidgets from "../../components/widgets/antd";
 import BasicConfig from "../basic";
 import {getTitleInListValues} from "../../utils/stuff";
 import {SqlString} from "../../utils/sql";
 import React from "react";
+
+// import 'moment/locale/zh-cn';
 
 const {
   FieldSelect,
@@ -56,7 +59,7 @@ const settings = {
   // localization
   locale: {
     ...BasicConfig.settings.locale,
-    antd: en_US,
+    antd: zh_CN,
   },
 };
 
