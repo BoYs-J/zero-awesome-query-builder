@@ -6,6 +6,7 @@ import {escapeRegExp, getTitleInListValues} from "../utils/stuff";
 import moment from "moment";
 import {settings as defaultSettings} from "../config/default";
 
+moment.locale('zh-cn'); //中文的时间
 const {
   //vanilla
   VanillaBooleanWidget,

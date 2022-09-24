@@ -1,5 +1,7 @@
 import moment from "moment";
 
+moment.locale('zh-cn'); //中文的时间
+
 const NOW = {
   label: "Now",
   returnType: "datetime",
