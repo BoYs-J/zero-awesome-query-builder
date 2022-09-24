@@ -1,6 +1,9 @@
 name: NPM Publish
 
 on:
+  push:
+    branches:
+      - '4.5.1'
   release:
     types: [published]
   workflow_dispatch:

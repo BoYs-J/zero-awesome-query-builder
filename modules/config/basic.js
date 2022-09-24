@@ -30,7 +30,7 @@ const { ProximityOperator } = Operators;
 
 const conjunctions = {
   AND: {
-    label: "And",
+    label: "和",
     mongoConj: "$and",
     reversedConj: "OR",
     formatConj: (children, conj, not, isForDisplay) => {
@@ -45,7 +45,7 @@ const conjunctions = {
     },
   },
   OR: {
-    label: "Or",
+    label: "或",
     mongoConj: "$or",
     reversedConj: "AND",
     formatConj: (children, conj, not, isForDisplay) => {
@@ -172,7 +172,7 @@ const operators = {
     elasticSearchQueryType: "range",
   },
   like: {
-    label: "Like",
+    label: "相似",
     labelForFormat: "Like",
     reversedOp: "not_like",
     sqlOp: "LIKE",
@@ -190,7 +190,7 @@ const operators = {
   },
   not_like: {
     isNotOp: true,
-    label: "Not like",
+    label: "不相似",
     reversedOp: "like",
     labelForFormat: "Not Like",
     sqlOp: "NOT LIKE",
@@ -203,7 +203,7 @@ const operators = {
     valueSources: ["value"],
   },
   starts_with: {
-    label: "Starts with",
+    label: "以开头",
     labelForFormat: "Starts with",
     sqlOp: "LIKE",
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
@@ -216,7 +216,7 @@ const operators = {
     valueSources: ["value"],
   },
   ends_with: {
-    label: "Ends with",
+    label: "以结束",
     labelForFormat: "Ends with",
     sqlOp: "LIKE",
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
@@ -229,7 +229,7 @@ const operators = {
     valueSources: ["value"],
   },
   between: {
-    label: "Between",
+    label: "介于",
     labelForFormat: "BETWEEN",
     sqlOp: "BETWEEN",
     cardinality: 2,
@@ -264,7 +264,7 @@ const operators = {
   },
   not_between: {
     isNotOp: true,
-    label: "Not between",
+    label: "不介于",
     labelForFormat: "NOT BETWEEN",
     sqlOp: "NOT BETWEEN",
     cardinality: 2,
@@ -286,7 +286,7 @@ const operators = {
     },
   },
   is_empty: {
-    label: "Is empty",
+    label: "为空",
     labelForFormat: "IS EMPTY",
     sqlOp: "IS EMPTY",
     cardinality: 0,
@@ -299,7 +299,7 @@ const operators = {
   },
   is_not_empty: {
     isNotOp: true,
-    label: "Is not empty",
+    label: "不为空",
     labelForFormat: "IS NOT EMPTY",
     sqlOp: "IS NOT EMPTY",
     cardinality: 0,
@@ -336,7 +336,7 @@ const operators = {
     jsonLogic: "!=",
   },
   select_any_in: {
-    label: "Any in",
+    label: "包含",
     labelForFormat: "IN",
     sqlOp: "IN",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
@@ -355,7 +355,7 @@ const operators = {
   },
   select_not_any_in: {
     isNotOp: true,
-    label: "Not in",
+    label: "不包含",
     labelForFormat: "NOT IN",
     sqlOp: "NOT IN",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
@@ -371,7 +371,7 @@ const operators = {
     reversedOp: "select_any_in",
   },
   multiselect_equals: {
-    label: "Equals",
+    label: "等于",
     labelForFormat: "==",
     sqlOp: "=",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
@@ -398,7 +398,7 @@ const operators = {
   },
   multiselect_not_equals: {
     isNotOp: true,
-    label: "Not equals",
+    label: "不等于",
     labelForFormat: "!=",
     sqlOp: "<>",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
@@ -418,7 +418,7 @@ const operators = {
     reversedOp: "multiselect_equals",
   },
   proximity: {
-    label: "Proximity search",
+    label: "邻近搜索",
     cardinality: 2,
     valueLabels: [
       { label: "Word 1", placeholder: "Enter first word" },
@@ -457,21 +457,21 @@ const operators = {
     },
   },
   some: {
-    label: "Some",
+    label: "部分",
     labelForFormat: "SOME",
     cardinality: 0,
     jsonLogic: "some",
     mongoFormatOp: mongoFormatOp1.bind(null, "$gt", v => 0, false),
   },
   all: {
-    label: "All",
+    label: "全部",
     labelForFormat: "ALL",
     cardinality: 0,
     jsonLogic: "all",
     mongoFormatOp: mongoFormatOp1.bind(null, "$eq", v => v, false),
   },
   none: {
-    label: "None",
+    label: "没有",
     labelForFormat: "NONE",
     cardinality: 0,
     jsonLogic: "none",
