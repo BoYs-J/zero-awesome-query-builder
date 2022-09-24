@@ -6,8 +6,6 @@ import {getTitleInListValues} from "../../utils/stuff";
 import {SqlString} from "../../utils/sql";
 import React from "react";
 
-// import 'moment/locale/zh-cn';
-
 const {
   FieldSelect,
   FieldDropdown,

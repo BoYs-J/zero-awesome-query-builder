@@ -6,7 +6,6 @@ import {escapeRegExp, getTitleInListValues} from "../utils/stuff";
 import moment from "moment";
 import {settings as defaultSettings} from "../config/default";
 
-// moment.locale('zh-cn'); //中文的时间
 const {
   //vanilla
   VanillaBooleanWidget,
@@ -174,7 +173,7 @@ const operators = {
   },
   like: {
     label: "相似",
-    labelForFormat: "Like",
+    labelForFormat: "相似",
     reversedOp: "not_like",
     sqlOp: "LIKE",
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
@@ -249,7 +248,7 @@ const operators = {
     ],
     textSeparators: [
       null,
-      "and"
+      "和"
     ],
     reversedOp: "not_between",
     jsonLogic: "<=",
@@ -489,7 +488,7 @@ const widgets = {
     jsType: "string",
     valueSrc: "value",
     valueLabel: "String",
-    valuePlaceholder: "Enter string",
+    valuePlaceholder: "输入字符",
     factory: (props) => <VanillaTextWidget {...props} />,
     formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
       return isForDisplay ? '"' + val + '"' : JSON.stringify(val);
@@ -509,7 +508,7 @@ const widgets = {
     jsType: "string",
     valueSrc: "value",
     valueLabel: "Text",
-    valuePlaceholder: "Enter text",
+    valuePlaceholder: "输入文本",
     factory: (props) => <VanillaTextAreaWidget {...props} />,
     formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
       return isForDisplay ? '"' + val + '"' : JSON.stringify(val);
@@ -531,10 +530,10 @@ const widgets = {
     valueSrc: "value",
     factory: (props) => <VanillaNumberWidget {...props} />,
     valueLabel: "Number",
-    valuePlaceholder: "Enter number",
+    valuePlaceholder: "输入数字",
     valueLabels: [
-      { label: "Number from", placeholder: "Enter number from" },
-      { label: "Number to", placeholder: "Enter number to" },
+      { label: "Number from", placeholder: "输入起始数字" },
+      { label: "Number to", placeholder: "输入结束数字" },
     ],
     formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
       return isForDisplay ? val : JSON.stringify(val);
@@ -551,7 +550,7 @@ const widgets = {
     valueSrc: "value",
     factory: (props) => <VanillaSliderWidget {...props} />,
     valueLabel: "Number",
-    valuePlaceholder: "Enter number or move slider",
+    valuePlaceholder: "输入数字或移动滑块",
     formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
       return isForDisplay ? val : JSON.stringify(val);
     },
@@ -567,7 +566,7 @@ const widgets = {
     valueSrc: "value",
     factory: (props) => <VanillaSelectWidget {...props} />,
     valueLabel: "Value",
-    valuePlaceholder: "Select value",
+    valuePlaceholder: "选择值",
     formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
       let valLabel = getTitleInListValues(fieldDef.fieldSettings.listValues || fieldDef.asyncListValues, val);
       return isForDisplay ? '"' + valLabel + '"' : JSON.stringify(val);
@@ -584,7 +583,7 @@ const widgets = {
     valueSrc: "value",
     factory: (props) => <VanillaMultiSelectWidget {...props} />,
     valueLabel: "Values",
-    valuePlaceholder: "Select values",
+    valuePlaceholder: "选择值",
     formatValue: (vals, fieldDef, wgtDef, isForDisplay) => {
       let valsLabels = vals.map(v => getTitleInListValues(fieldDef.fieldSettings.listValues || fieldDef.asyncListValues, v));
       return isForDisplay ? valsLabels.map(v => '"' + v + '"') : vals.map(v => JSON.stringify(v));
@@ -600,14 +599,14 @@ const widgets = {
     jsType: "string",
     valueSrc: "value",
     factory: (props) => <VanillaDateWidget {...props} />,
-    dateFormat: "DD.MM.YYYY",
+    dateFormat: "YYYY-MM-DD",
     valueFormat: "YYYY-MM-DD",
     useKeyboard: true,
     valueLabel: "Date",
-    valuePlaceholder: "Enter date",
+    valuePlaceholder: "输入日期",
     valueLabels: [
-      { label: "Date from", placeholder: "Enter date from" },
-      { label: "Date to", placeholder: "Enter date to" },
+      { label: "Date from", placeholder: "输入开始日期" },
+      { label: "Date to", placeholder: "输入结束日期" },
     ],
     formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
       const dateVal = moment(val, wgtDef.valueFormat);
@@ -637,10 +636,10 @@ const widgets = {
     use12Hours: false,
     useKeyboard: true,
     valueLabel: "Time",
-    valuePlaceholder: "Enter time",
+    valuePlaceholder: "输入时间",
     valueLabels: [
-      { label: "Time from", placeholder: "Enter time from" },
-      { label: "Time to", placeholder: "Enter time to" },
+      { label: "Time from", placeholder: "输入开始时间" },
+      { label: "Time to", placeholder: "输入结束时间" },
     ],
     formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
       const dateVal = moment(val, wgtDef.valueFormat);
@@ -685,15 +684,15 @@ const widgets = {
     valueSrc: "value",
     factory: (props) => <VanillaDateTimeWidget {...props} />,
     timeFormat: "HH:mm",
-    dateFormat: "DD.MM.YYYY",
+    dateFormat: "YYYY-MM-DD",
     valueFormat: "YYYY-MM-DD HH:mm:ss",
     use12Hours: false,
     useKeyboard: true,
     valueLabel: "Datetime",
-    valuePlaceholder: "Enter datetime",
+    valuePlaceholder: "输入日期-时间",
     valueLabels: [
-      { label: "Datetime from", placeholder: "Enter datetime from" },
-      { label: "Datetime to", placeholder: "Enter datetime to" },
+      { label: "Datetime from", placeholder: "输入开始日期-时间" },
+      { label: "Datetime to", placeholder: "输入结束日期-时间" },
     ],
     formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
       const dateVal = moment(val, wgtDef.valueFormat);
@@ -740,7 +739,7 @@ const widgets = {
       return val;
     },
     valueLabel: "Field to compare",
-    valuePlaceholder: "Select field to compare",
+    valuePlaceholder: "选择要比较的字段",
     customProps: {
       showSearch: true
     }
@@ -749,7 +748,7 @@ const widgets = {
     valueSrc: "func",
     factory: (props) => <FuncWidget {...props} />,
     valueLabel: "Function",
-    valuePlaceholder: "Select function",
+    valuePlaceholder: "选择功能",
     customProps: {
       //showSearch: true
     }
