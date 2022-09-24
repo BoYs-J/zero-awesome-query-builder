@@ -339,11 +339,11 @@ const operators = {
     label: "包含",
     labelForFormat: "IN",
     sqlOp: "IN",
-    formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
+    formatOp: (value, field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
       if (valueSrc == "value")
-        return `${field} IN (${values.join(", ")})`;
+        return `${value} IN (${values.join(", ")})`;
       else
-        return `${field} IN (${values})`;
+        return `${value} IN (${values})`;
     },
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       return `${field} IN (${values.join(", ")})`;
