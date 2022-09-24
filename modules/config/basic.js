@@ -192,7 +192,7 @@ const operators = {
     isNotOp: true,
     label: "不相似",
     reversedOp: "like",
-    labelForFormat: "Not Like",
+    labelForFormat: "不相似",
     sqlOp: "NOT LIKE",
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       if (valueSrc == "value") {
@@ -421,8 +421,8 @@ const operators = {
     label: "邻近搜索",
     cardinality: 2,
     valueLabels: [
-      { label: "Word 1", placeholder: "Enter first word" },
-      { label: "Word 2", placeholder: "Enter second word" },
+      { label: "Word 1", placeholder: "第一个单词" },
+      { label: "Word 2", placeholder: "第二个单词" },
     ],
     textSeparators: [
       //'Word 1',
@@ -446,7 +446,7 @@ const operators = {
     jsonLogic: undefined, // not supported
     options: {
       optionLabel: "Near", // label on top of "near" selectbox (for config.settings.showLabels==true)
-      optionTextBefore: "Near", // label before "near" selectbox (for config.settings.showLabels==false)
+      optionTextBefore: "接近", // label before "near" selectbox (for config.settings.showLabels==false)
       optionPlaceholder: "Select words between", // placeholder for "near" selectbox
       factory: (props) => <ProximityOperator {...props} />,
       minProximity: 2,
@@ -532,8 +532,8 @@ const widgets = {
     valueLabel: "Number",
     valuePlaceholder: "输入数字",
     valueLabels: [
-      { label: "Number from", placeholder: "输入起始数字" },
-      { label: "Number to", placeholder: "输入结束数字" },
+      { label: "Number from", placeholder: "起始数字" },
+      { label: "Number to", placeholder: "结束数字" },
     ],
     formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
       return isForDisplay ? val : JSON.stringify(val);
@@ -605,8 +605,8 @@ const widgets = {
     valueLabel: "Date",
     valuePlaceholder: "输入日期",
     valueLabels: [
-      { label: "Date from", placeholder: "输入开始日期" },
-      { label: "Date to", placeholder: "输入结束日期" },
+      { label: "Date from", placeholder: "起始日期" },
+      { label: "Date to", placeholder: "结束日期" },
     ],
     formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
       const dateVal = moment(val, wgtDef.valueFormat);
@@ -638,8 +638,8 @@ const widgets = {
     valueLabel: "Time",
     valuePlaceholder: "输入时间",
     valueLabels: [
-      { label: "Time from", placeholder: "输入开始时间" },
-      { label: "Time to", placeholder: "输入结束时间" },
+      { label: "Time from", placeholder: "起始时间" },
+      { label: "Time to", placeholder: "结束时间" },
     ],
     formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
       const dateVal = moment(val, wgtDef.valueFormat);
@@ -691,8 +691,8 @@ const widgets = {
     valueLabel: "Datetime",
     valuePlaceholder: "输入日期-时间",
     valueLabels: [
-      { label: "Datetime from", placeholder: "输入开始日期-时间" },
-      { label: "Datetime to", placeholder: "输入结束日期-时间" },
+      { label: "Datetime from", placeholder: "起始日期-时间" },
+      { label: "Datetime to", placeholder: "结束日期-时间" },
     ],
     formatValue: (val, fieldDef, wgtDef, isForDisplay) => {
       const dateVal = moment(val, wgtDef.valueFormat);
