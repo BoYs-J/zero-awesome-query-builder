@@ -68,7 +68,7 @@ export const settings = {
   addRuleLabel: "新增规则",
   addSubRuleLabel: "添加子规则",
   delGroupLabel: "",
-  notLabel: "不包含",
+  notLabel: "非",
   valueSourcesPopupTitle: "选择数据来源",
   removeRuleConfirmOptions: null,
   removeGroupConfirmOptions: null,

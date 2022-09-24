@@ -30,7 +30,7 @@ const { ProximityOperator } = Operators;
 
 const conjunctions = {
   AND: {
-    label: "含",
+    label: "且",
     mongoConj: "$and",
     reversedConj: "OR",
     formatConj: (children, conj, not, isForDisplay) => {
@@ -341,9 +341,9 @@ const operators = {
     sqlOp: "IN",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
       if (valueSrc == "value")
-        return `${field.label} IN (${values.join(", ")})`;
+        return `${field} IN (${values.join(", ")})`;
       else
-        return `${field.label} IN (${values.title})`;
+        return `${field} IN (${values})`;
     },
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       return `${field} IN (${values.join(", ")})`;
