@@ -26,6 +26,64 @@ const {
 const { ProximityOperator } = Operators;
 
 
+const ZH_CN_SIFT = {
+  'provider_type': '供应商类型',
+  'credentials_type': '凭据类型',
+  'resource': '资源名称',
+  'display_name': '显示名称',
+  'description': '类型',
+  'owner': '所有者',
+  'updated_date': '更新时间',
+  'state': '状态',
+  'stage': '阶段',
+  'dimension': '维度',
+  'assignee': '受让人',
+  'id': 'ID',
+  'task_id': '任务ID',
+  'project_id': '项目ID',
+  'task_name': '任务名称',
+  'project_name': '项目名称',
+  'status': '状态',
+  'mode': '数据',
+  'subset': '子集',
+  'name': '名称',
+  'label': '标签',
+  'type': '类型',
+  'shape': '形状',
+  'occluded': '封闭的',
+  'width': '宽度',
+  'height': '高度',
+  'objectID': '对象ID',
+  'serverID': '服务器ID',
+  'attr': '属性',
+  'AWS_S3_BUCKET': '亚马逊（AWS S3）',
+  'AZURE_CONTAINER': '微软（Azure）',
+  'GOOGLE_CLOUD_STORAGE': '谷歌（Google Cloud）',
+  'KEY_SECRET_KEY_PAIR': '密钥 & 隐藏密钥',
+  'ACCOUNT_NAME_TOKEN_PAIR': '帐户名称 & 令牌',
+  'ANONYMOUS_ACCESS': '匿名访问',
+  'KEY_FILE_PATH': '密钥文件',
+  'new': '新',
+  'in progress': '进行中',
+  'rejected': '驳回',
+  'completed': '完成',
+  'annotation': '注释',
+  'validation': '验证',
+  'acceptance': '接受',
+  '2d': '2D',
+  '3d': '3D',
+  'interpolation': '视频',
+  'shape': '形状',
+  'track': '轨道',
+  'tag': '标记',
+  'rectangle': '长方形',
+  'points': '点',
+  'polyline': '多段线',
+  'polygon': '多边形',
+  'cuboid': '长方体',
+  'ellipse': '椭圆',
+  'skeleton': '骨骼',
+};
 //----------------------------  conjunctions
 
 const conjunctions = {
@@ -112,9 +170,9 @@ const operators = {
     reversedOp: "not_equal",
     formatOp: (field, op, value, valueSrcs, valueTypes, opDef, operatorOptions, isForDisplay, fieldDef) => {
       if (valueTypes == "boolean" && isForDisplay)
-        return value == "No" ? `NOT ${field}` : `${field}`;
+        return value == "No" ? `NOT ${ZH_CN_SIFT[field]}` : `${ZH_CN_SIFT[field]}`;
       else
-        return `${field} ${opDef.label} ${value}`;
+        return `${ZH_CN_SIFT[field]} ${opDef.label} ${value}`;
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$eq", v => v, false),
     jsonLogic: "==",
@@ -128,9 +186,9 @@ const operators = {
     reversedOp: "equal",
     formatOp: (field, op, value, valueSrcs, valueTypes, opDef, operatorOptions, isForDisplay, fieldDef) => {
       if (valueTypes == "boolean" && isForDisplay)
-        return value == "No" ? `${field}` : `NOT ${field}`;
+        return value == "No" ? `${ZH_CN_SIFT[field]}` : `NOT ${ZH_CN_SIFT[field]}`;
       else
-        return `${field} ${opDef.label} ${value}`;
+        return `${ZH_CN_SIFT[field]} ${opDef.label} ${value}`;
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$ne", v => v, false),
     jsonLogic: "!=",
@@ -178,7 +236,7 @@ const operators = {
     sqlOp: "LIKE",
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       if (valueSrc == "value") {
-        return `${field} 相似 ${values}`;
+        return `${ZH_CN_SIFT[field]} 相似 ${values}`;
       } else return undefined; // not supported
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$regex", v => (typeof v == "string" ? escapeRegExp(v) : undefined), false),
@@ -196,7 +254,7 @@ const operators = {
     sqlOp: "NOT LIKE",
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       if (valueSrc == "value") {
-        return `${field} 不相似 ${values}`;
+        return `${ZH_CN_SIFT[field]} 不相似 ${values}`;
       } else return undefined; // not supported
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$regex", v => (typeof v == "string" ? escapeRegExp(v) : undefined), true),
@@ -208,7 +266,7 @@ const operators = {
     sqlOp: "LIKE",
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       if (valueSrc == "value") {
-        return `${field} LIKE ${values}`;
+        return `${ZH_CN_SIFT[field]} LIKE ${values}`;
       } else return undefined; // not supported
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$regex", v => (typeof v == "string" ? "^" + escapeRegExp(v) : undefined), false),
@@ -221,7 +279,7 @@ const operators = {
     sqlOp: "LIKE",
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       if (valueSrc == "value") {
-        return `${field} LIKE ${values}`;
+        return `${ZH_CN_SIFT[field]} LIKE ${values}`;
       } else return undefined; // not supported
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$regex", v => (typeof v == "string" ? escapeRegExp(v) + "$" : undefined), false),
@@ -237,9 +295,9 @@ const operators = {
       let valFrom = values.first();
       let valTo = values.get(1);
       if (isForDisplay)
-        return `${field} 介于 ${valFrom} 和 ${valTo}`;
+        return `${ZH_CN_SIFT[field]} 介于 ${valFrom} 和 ${valTo}`;
       else
-        return `${field} >= ${valFrom} && ${field} <= ${valTo}`;
+        return `${ZH_CN_SIFT[field]} >= ${valFrom} && ${ZH_CN_SIFT[field]} <= ${valTo}`;
     },
     mongoFormatOp: mongoFormatOp2.bind(null, ["$gte", "$lte"], false),
     valueLabels: [
@@ -292,7 +350,7 @@ const operators = {
     cardinality: 0,
     reversedOp: "is_not_empty",
     formatOp: (field, op, value, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
-      return isForDisplay ? `${field} 为空` : `!${field}`;
+      return isForDisplay ? `${ZH_CN_SIFT[field]} 为空` : `!${ZH_CN_SIFT[field]}`;
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$exists", v => false, false),
     jsonLogic: "!",
@@ -305,7 +363,7 @@ const operators = {
     cardinality: 0,
     reversedOp: "is_empty",
     formatOp: (field, op, value, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
-      return isForDisplay ? `${field} 不为空` : `!!${field}`;
+      return isForDisplay ? `${ZH_CN_SIFT[field]} 不为空` : `!!${ZH_CN_SIFT[field]}`;
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$exists", v => true, false),
     jsonLogic: "!!",
@@ -316,7 +374,7 @@ const operators = {
     labelForFormat: "==",
     sqlOp: "=", // enum/set
     formatOp: (field, op, value, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
-      return `${field} == ${value}`;
+      return `${ZH_CN_SIFT[field]} == ${value}`;
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$eq", v => v, false),
     reversedOp: "select_not_equals",
@@ -329,7 +387,7 @@ const operators = {
     labelForFormat: "!=",
     sqlOp: "<>", // enum/set
     formatOp: (field, op, value, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
-      return `${field} != ${value}`;
+      return `${ZH_CN_SIFT[field]} != ${value}`;
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$ne", v => v, false),
     reversedOp: "select_equals",
@@ -341,12 +399,12 @@ const operators = {
     sqlOp: "IN",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
       if (valueSrc == "value")
-        return `${field} 包含 (${values.join(", ")})`;
+        return `${ZH_CN_SIFT[field]} 包含 (${ZH_CN_SIFT[values.join(", ")]})`;
       else
-        return `${field} 包含 (${values})`;
+        return `${ZH_CN_SIFT[field]} 包含 (${values})`;
     },
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
-      return `${field} 包含 (${values.join(", ")})`;
+      return `${ZH_CN_SIFT[field]} 包含 (${ZH_CN_SIFT[values.join(", ")]})`;
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$in", v => v, false),
     reversedOp: "select_not_any_in",
@@ -360,12 +418,12 @@ const operators = {
     sqlOp: "NOT IN",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
       if (valueSrc == "value")
-        return `${field} 不包含 (${values.join(", ")})`;
+        return `${ZH_CN_SIFT[field]} 不包含 (${ZH_CN_SIFT[values.join(", ")]})`;
       else
-        return `${field} 不包含 (${values})`;
+        return `${ZH_CN_SIFT[field]} 不包含 (${values})`;
     },
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
-      return `${field} 不包含 (${values.join(", ")})`;
+      return `${ZH_CN_SIFT[field]} 不包含 (${ZH_CN_SIFT[values.join(", ")]})`;
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$nin", v => v, false),
     reversedOp: "select_any_in",
@@ -376,14 +434,14 @@ const operators = {
     sqlOp: "=",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
       if (valueSrc == "value")
-        return `${field} == [${values.join(", ")}]`;
+        return `${ZH_CN_SIFT[field]} == [${ZH_CN_SIFT[values.join(", ")]}]`;
       else
-        return `${field} == ${values}`;
+        return `${ZH_CN_SIFT[field]} == ${values}`;
     },
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       if (valueSrc == "value")
       // set
-        return `${field} = '${values.map(v => SqlString.trim(v)).join(",")}'`;
+        return `${ZH_CN_SIFT[field]} = '${values.map(v => SqlString.trim(v)).join(",")}'`;
       else
         return undefined; //not supported
     },
@@ -403,14 +461,14 @@ const operators = {
     sqlOp: "<>",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
       if (valueSrc == "value")
-        return `${field} != [${values.join(", ")}]`;
+        return `${ZH_CN_SIFT[field]} != [${ZH_CN_SIFT[values.join(", ")]}]`;
       else
-        return `${field} != ${values}`;
+        return `${ZH_CN_SIFT[field]} != ${values}`;
     },
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       if (valueSrc == "value")
       // set
-        return `${field} != '${values.map(v => SqlString.trim(v)).join(",")}'`;
+        return `${ZH_CN_SIFT[field]} != '${values.map(v => SqlString.trim(v)).join(",")}'`;
       else
         return undefined; //not supported
     },
@@ -432,7 +490,7 @@ const operators = {
       const val1 = values.first();
       const val2 = values.get(1);
       const prox = operatorOptions.get("proximity");
-      return `${field} ${val1} NEAR/${prox} ${val2}`;
+      return `${ZH_CN_SIFT[field]} ${val1} NEAR/${prox} ${val2}`;
     },
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       const val1 = values.first();
@@ -440,7 +498,7 @@ const operators = {
       const aVal1 = SqlString.trim(val1);
       const aVal2 = SqlString.trim(val2);
       const prox = operatorOptions.get("proximity");
-      return `CONTAINS(${field}, 'NEAR((${aVal1}, ${aVal2}), ${prox})')`;
+      return `CONTAINS(${ZH_CN_SIFT[field]}, 'NEAR((${aVal1}, ${aVal2}), ${prox})')`;
     },
     mongoFormatOp: undefined, // not supported
     jsonLogic: undefined, // not supported
