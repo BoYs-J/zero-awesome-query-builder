@@ -34,7 +34,7 @@ const ZH_CN_SIFT = {
   'description': '类型',
   'owner': '所有者',
   'updated_date': '更新时间',
-  'status': '状态',
+  'state': '状态',
   'stage': '阶段',
   'dimension': '维度',
   'assignee': '受让人',
@@ -43,10 +43,19 @@ const ZH_CN_SIFT = {
   'project_id': '项目ID',
   'task_name': '任务名称',
   'project_name': '项目名称',
+  'status': '状态',
   'mode': '数据',
   'subset': '子集',
   'name': '名称',
-
+  'label': '标签',
+  'type': '类型',
+  'shape': '形状',
+  'occluded': '封闭的',
+  'width': '宽度',
+  'height': '高度',
+  'objectID': '对象ID',
+  'serverID': '服务器ID',
+  'attr': '属性',
   'AWS_S3_BUCKET': '亚马逊（AWS S3）',
   'AZURE_CONTAINER': '微软（Azure）',
   'GOOGLE_CLOUD_STORAGE': '谷歌（Google Cloud）',
@@ -64,6 +73,16 @@ const ZH_CN_SIFT = {
   '2d': '2D',
   '3d': '3D',
   'interpolation': '视频',
+  'shape': '形状',
+  'track': '轨道',
+  'tag': '标记',
+  'rectangle': '长方形',
+  'points': '点',
+  'polyline': '多段线',
+  'polygon': '多边形',
+  'cuboid': '长方体',
+  'ellipse': '椭圆',
+  'skeleton': '骨骼',
 };
 //----------------------------  conjunctions
 
@@ -217,7 +236,7 @@ const operators = {
     sqlOp: "LIKE",
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       if (valueSrc == "value") {
-        return `${ZH_CN_SIFT[field]} 相似 ${ZH_CN_SIFT[values]}`;
+        return `${ZH_CN_SIFT[field]} 相似 ${values}`;
       } else return undefined; // not supported
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$regex", v => (typeof v == "string" ? escapeRegExp(v) : undefined), false),
@@ -235,7 +254,7 @@ const operators = {
     sqlOp: "NOT LIKE",
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       if (valueSrc == "value") {
-        return `${ZH_CN_SIFT[field]} 不相似 ${ZH_CN_SIFT[values]}`;
+        return `${ZH_CN_SIFT[field]} 不相似 ${values}`;
       } else return undefined; // not supported
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$regex", v => (typeof v == "string" ? escapeRegExp(v) : undefined), true),
@@ -247,7 +266,7 @@ const operators = {
     sqlOp: "LIKE",
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       if (valueSrc == "value") {
-        return `${ZH_CN_SIFT[field]} LIKE ${ZH_CN_SIFT[values]}`;
+        return `${ZH_CN_SIFT[field]} LIKE ${values}`;
       } else return undefined; // not supported
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$regex", v => (typeof v == "string" ? "^" + escapeRegExp(v) : undefined), false),
@@ -260,7 +279,7 @@ const operators = {
     sqlOp: "LIKE",
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       if (valueSrc == "value") {
-        return `${ZH_CN_SIFT[field]} LIKE ${ZH_CN_SIFT[values]}`;
+        return `${ZH_CN_SIFT[field]} LIKE ${values}`;
       } else return undefined; // not supported
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$regex", v => (typeof v == "string" ? escapeRegExp(v) + "$" : undefined), false),
@@ -380,12 +399,12 @@ const operators = {
     sqlOp: "IN",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
       if (valueSrc == "value")
-        return `${ZH_CN_SIFT[field]} 包含 (${values.join(", ")})`;
+        return `${ZH_CN_SIFT[field]} 包含 (${ZH_CN_SIFT[values.join(", ")]})`;
       else
-        return `${ZH_CN_SIFT[field]} 包含 (${ZH_CN_SIFT[values]})`;
+        return `${ZH_CN_SIFT[field]} 包含 (${values})`;
     },
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
-      return `${ZH_CN_SIFT[field]} 包含 (${values.join(", ")})`;
+      return `${ZH_CN_SIFT[field]} 包含 (${ZH_CN_SIFT[values.join(", ")]})`;
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$in", v => v, false),
     reversedOp: "select_not_any_in",
@@ -399,12 +418,12 @@ const operators = {
     sqlOp: "NOT IN",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
       if (valueSrc == "value")
-        return `${ZH_CN_SIFT[field]} 不包含 (${values.join(", ")})`;
+        return `${ZH_CN_SIFT[field]} 不包含 (${ZH_CN_SIFT[values.join(", ")]})`;
       else
-        return `${ZH_CN_SIFT[field]} 不包含 (${ZH_CN_SIFT[values]})`;
+        return `${ZH_CN_SIFT[field]} 不包含 (${values})`;
     },
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
-      return `${ZH_CN_SIFT[field]} 不包含 (${values.join(", ")})`;
+      return `${ZH_CN_SIFT[field]} 不包含 (${ZH_CN_SIFT[values.join(", ")]})`;
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$nin", v => v, false),
     reversedOp: "select_any_in",
@@ -415,9 +434,9 @@ const operators = {
     sqlOp: "=",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
       if (valueSrc == "value")
-        return `${ZH_CN_SIFT[field]} == [${values.join(", ")}]`;
+        return `${ZH_CN_SIFT[field]} == [${ZH_CN_SIFT[values.join(", ")]}]`;
       else
-        return `${ZH_CN_SIFT[field]} == ${ZH_CN_SIFT[values]}`;
+        return `${ZH_CN_SIFT[field]} == ${values}`;
     },
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       if (valueSrc == "value")
@@ -442,9 +461,9 @@ const operators = {
     sqlOp: "<>",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
       if (valueSrc == "value")
-        return `${ZH_CN_SIFT[field]} != [${values.join(", ")}]`;
+        return `${ZH_CN_SIFT[field]} != [${ZH_CN_SIFT[values.join(", ")]}]`;
       else
-        return `${ZH_CN_SIFT[field]} != ${ZH_CN_SIFT[values]}`;
+        return `${ZH_CN_SIFT[field]} != ${values}`;
     },
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       if (valueSrc == "value")
