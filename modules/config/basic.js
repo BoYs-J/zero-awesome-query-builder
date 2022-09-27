@@ -347,10 +347,6 @@ const operators = {
     },
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       return `${field} 包含 (${values.join(", ")})`;
-      console.log("1:"+values.join(", "));
-      console.log("2:"+value);
-      console.log("3:"+values);
-      console.log("4:"+valueSrc);
     },
     mongoFormatOp: mongoFormatOp1.bind(null, "$in", v => v, false),
     reversedOp: "select_not_any_in",
