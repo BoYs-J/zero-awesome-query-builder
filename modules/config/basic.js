@@ -340,10 +340,17 @@ const operators = {
     labelForFormat: "IN",
     sqlOp: "IN",
     formatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions, isForDisplay) => {
-      if (valueSrc == "value")
+      if (valueSrc == "value"){
         return `${field} 包含 (${values.join(", ")})`;
-      else
+        
+        console.log("1:"+values.join(", "));
+        console.log("2:"+values);
+        console.log("3:"+valueSrc)}
+      else{
         return `${field} 包含 (${values})`;
+        console.log("1:"+values.join(", "));
+        console.log("2:"+values);
+        console.log("3:"+valueSrc)}
     },
     sqlFormatOp: (field, op, values, valueSrc, valueType, opDef, operatorOptions) => {
       return `${field} 包含 (${values.join(", ")})`;
